@@ -2,9 +2,29 @@
 
 `ScenePack` is the public-facing name for this project. It avoids the translation drift around `Peepaste` and gives the repository a cleaner external identity.
 
+- Current public version: `0.3.0`
+- Release stage: `Prototype / Public repo bootstrap`
+- Supported OS focus: `Windows 11`
+- Current source package name: `peepaste`
+
 - Public name: `ScenePack`
 - Internal codename: `Peepaste`
 - Current Python package name: `peepaste`
+
+## Release Status
+
+This repository is now public, but the product is still in an early prototype stage.
+
+- Version `0.3.0` is the current public source snapshot.
+- The repository is suitable for inspection, local testing, and engineering discussion.
+- The current prototype is not yet a polished public installer release.
+- Compatibility is strongest on Windows desktop workflows with Snipaste-heavy usage.
+
+If you want the current release context first, read:
+
+- [CHANGELOG.md](CHANGELOG.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [11 Versioning And Release Policy](docs/11_versioning_and_release_policy.md)
 
 ## 中文简介
 
@@ -37,6 +57,23 @@ ScenePack currently works best when combined with a few existing tools:
   Used for internal Windows packaging.
 - Downstream AI / agent tools  
   ScenePack currently exports handoff files such as `openclaw_prompt.md`, `review_sheet.md`, and `clipboard_bundle.txt`. The current prototype prepares these files; it does not hard-bind users to one hosted service.
+
+## Compatibility Snapshot
+
+Current tested or intended environment:
+
+- Windows 11 Pro
+- Python `3.11+`
+- Snipaste desktop workflow
+- optional `PySide6` GUI
+- optional `PyInstaller` packaging flow
+
+Current non-goals for this public snapshot:
+
+- polished macOS support
+- production Linux desktop support
+- fully renamed Python import path
+- hosted cloud service workflow
 
 ## Quick Start
 
@@ -332,6 +369,7 @@ What it does not yet include:
 - [08 Architecture Standards](docs/08_architecture_standards.md)
 - [09 V2 Validation Report](docs/09_v2_validation_report.md)
 - [10 V2 Critical Audit](docs/10_v2_critical_audit.md)
+- [11 Versioning And Release Policy](docs/11_versioning_and_release_policy.md)
 - [12 Internal Test Installer](docs/12_internal_test_installer.md)
 - [13 UX Handoff And Skill++ Decision](docs/13_ux_handoff_and_skill_plus_plus.md)
 
