@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peepaste"
+version = "0.3.0"
+description = "Desktop visual scene aggregation prototype for ScenePack."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "ScenePack Project" }]
+dependencies = []
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.7"]
+packaging = ["PyInstaller>=6.3"]
+dev = []
+
+[project.scripts]
+peepaste = "peepaste.cli:main"
+peepaste-app = "peepaste.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

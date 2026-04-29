@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.2",
+  "storage_root": "%USERPROFILE%\\Documents\\ScenePack\\Projects",
+  "capture_filter": "Snipaste",
+  "appearance": {
+    "theme": "light",
+    "language": "en",
+    "accent_color": "#2563eb",
+    "font_family": "Segoe UI",
+    "font_size": 12
+  },
+  "privacy": {
+    "read_images_by_default": false,
+    "upload_images_by_default": false,
+    "log_private_text": false
+  },
+  "ai": {
+    "enabled": false,
+    "provider": "openai",
+    "api_key_env": "OPENAI_API_KEY",
+    "model": "",
+    "token_budget": 4000
+  },
+  "skills": {
+    "title_patterns": [
+      "{kind}_{date}",
+      "{kind}_{zone_count}zones_{date}",
+      "visual_scene_{date}"
+    ],
+    "naming_profiles": {
+      "mixed": "neutral_timestamp",
+      "project_management": "task_evidence",
+      "image_material": "visual_material",
+      "ai_coding": "prompt_context_result",
+      "product_research": "competitor_feature_evidence"
+    },
+    "ignored_structure_signals": [],
+    "trusted_downstream_targets": [
+      "agent_context",
+      "markdown"
+    ]
+  },
+  "install": {
+    "initialized": false,
+    "install_channel": "internal",
+    "startup_on_login": false,
+    "open_gui_on_start": true,
+    "auto_monitor": false,
+    "monitor_interval_seconds": 1.5,
+    "stable_capture_ticks": 2,
+    "platform_target": "windows_11",
+    "snipaste_min_version": "2.10.8",
+    "snipaste_max_version": "2.11.3"
+  }
+}
+
