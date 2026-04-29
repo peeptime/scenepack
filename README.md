@@ -6,6 +6,96 @@
 - Internal codename: `Peepaste`
 - Current Python package name: `peepaste`
 
+## 中文简介
+
+`ScenePack` 不是截图工具替代品，也不是又一个“套壳 AI”。它解决的是更前面、也更真实的工作问题：
+
+> 用户已经把截图、网页、报错、设计参考、表格和笔记在桌面上排好了，但下游 AI 或文档工具仍然要求他们重新解释一遍。
+
+很多真实工作并不是缺“多一张截图”，而是缺“把已经整理过的视觉现场保存成后续工具可继续使用的上下文包”。
+
+`ScenePack` 想做的是：
+
+- 先安静记录桌面视觉工作现场
+- 保留布局、分组、权重、稳定性这些结构信号
+- 让用户确认标题或意图
+- 再生成可交给 AI、文档流、任务流的干净交接包
+
+当前原型主要面向 Windows 桌面、Snipaste 重度贴图工作流，以及需要把视觉整理结果继续交给下游工具的人。
+
+## Related Software
+
+ScenePack currently works best when combined with a few existing tools:
+
+- [Snipaste](https://www.snipaste.com/)  
+  For pinned screenshots and desktop visual arrangement. ScenePack does not modify Snipaste; it observes compatible window states through normal OS APIs.
+- [Python 3.11+](https://www.python.org/downloads/)  
+  Required for running the source prototype and CLI commands.
+- [PySide6](https://doc.qt.io/qtforpython-6/)  
+  Optional dependency for the tray-based GUI prototype.
+- [PyInstaller](https://pyinstaller.org/en/stable/)  
+  Used for internal Windows packaging.
+- Downstream AI / agent tools  
+  ScenePack currently exports handoff files such as `openclaw_prompt.md`, `review_sheet.md`, and `clipboard_bundle.txt`. The current prototype prepares these files; it does not hard-bind users to one hosted service.
+
+## Quick Start
+
+If you want to understand the project quickly, use this path:
+
+1. Prepare a screenshot-heavy desktop scene, ideally with [Snipaste](https://www.snipaste.com/) pinned images.
+2. Run ScenePack from source and capture the current window layout.
+3. Inspect the generated scene record and title candidate.
+4. Accept the title when the scene meaning is stable enough.
+5. Generate the handoff package and pass it to your downstream AI or documentation workflow.
+
+## 操作指引
+
+如果你是第一次看这个项目，建议按下面顺序操作：
+
+1. 安装 Python 3.11 以上版本。
+2. 如果你使用 Snipaste，请先准备一个真实贴图场景。
+3. 在项目目录里先跑 demo 或窗口抓取命令，确认 ScenePack 能看到你的桌面布局。
+4. 看输出目录里的 `project_state.json`、`scene_records/` 和标题候选。
+5. 觉得标题合适后执行 `accept-title --generate`。
+6. 检查生成的 `openclaw_prompt.md`、`review_sheet.md`、`clipboard_bundle.txt` 等交接文件。
+7. 再把这些文件复制或拖给你的下游 AI、文档、任务系统继续处理。
+
+## First Run From Source
+
+Install the project:
+
+```powershell
+py -m pip install -e .
+```
+
+Run the sample demo:
+
+```powershell
+$env:PYTHONPATH="src"
+py -m peepaste demo
+```
+
+Capture a real desktop scene:
+
+```powershell
+$env:PYTHONPATH="src"
+py -m peepaste capture-windows --process Snipaste --snipaste-pasters-only --out .peepaste-runs\first-scene
+```
+
+Accept a title and generate the handoff package:
+
+```powershell
+$env:PYTHONPATH="src"
+py -m peepaste accept-title .peepaste-runs\first-scene --title "My Scene Title" --generate
+```
+
+If you want the tray UI:
+
+```powershell
+py -m pip install -e .[gui]
+peepaste gui
+```
+
 ## What This Project Actually Solves
 
 This project is for people who work by pinning screenshots, arranging references, comparing UI states, collecting error messages, and then trying to continue the work with AI, docs, spreadsheets, or task tools.
@@ -51,6 +141,19 @@ It is a desktop visual aggregation layer:
 - let downstream AI or tools continue from better context
 
 The current target environment is Windows desktop workflows, especially screenshot-heavy workbenches.
+
+## Core Workflow Example
+
+A typical real workflow looks like this:
+
+1. A user pins 4 to 12 screenshots on the desktop.
+2. They group them visually to compare versions, errors, references, or evidence.
+3. ScenePack captures that stable visual arrangement.
+4. The user reviews the candidate title instead of rewriting the whole context from zero.
+5. ScenePack writes a structured package.
+6. The package is copied or dragged into the next tool for writing, reasoning, reporting, or task creation.
+
+The point is not to automate the whole project. The point is to avoid losing the user's first round of manual organization.
 
 ## Core Business Flow
 
@@ -198,6 +301,23 @@ The guardrail is simple:
 The repository and package can remain `peepaste` for compatibility during prototyping, but the public-facing copy should move toward `ScenePack` or another neutral brand in the same direction.
 
 That lets the project keep engineering continuity without forcing the public story to inherit a bad translation outcome.
+
+## Public Prototype Scope
+
+What this repository currently includes:
+
+- source prototype for Windows desktop scene capture
+- CLI commands for capture, monitoring, title acceptance, and generation
+- optional tray UI prototype
+- packaging scripts for internal Windows builds
+- product and architecture documents
+
+What it does not yet include:
+
+- a polished public installer
+- a fully renamed Python package
+- direct online submission into a hosted AI product
+- production-grade multi-platform support
 
 ## Document Map
 
